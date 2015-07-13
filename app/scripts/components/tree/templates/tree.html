@@ -1,0 +1,25 @@
+<div>
+	<button ng-click="vm.test()">Test</button>
+	<div class="tree">
+		{{vm.tree.name}}
+		<div>
+			<span ng-repeat="child in vm.tree.children">
+				{{child.name}}
+			</span>
+			<div ng-repeat="child in vm.tree.children"
+				ng-if="child.children.length > 0"
+				ng-include="'tree_node.html'">
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="tree_node.html">
+	<span ng-repeat="item in child.children">
+		{{item.name}}
+	</span>
+	<div ng-repeat="item in child.children"
+		ng-if="item.children.length > 0"
+		ng-include="'tree_node.html'">
+	</div>
+</script>
