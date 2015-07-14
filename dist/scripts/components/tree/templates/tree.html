@@ -1,0 +1,26 @@
+<div class="tree row no-gutter"> <div class="row no-gutter instruction"> Click a node to add a child </div> <div class="row no-gutter"> <span class="bubble no-children">No Children</span> <span class="bubble no-sibling">No Sibling</span> <span class="bubble most-grandchildren">Most Grandchildren</span> <span class="bubble no-children no-sibling">No Children & No Sibling</span> </div> <div class="row no-gutter"> <span class="form-group"> <input type="text" ng-model="vm.searchTerm" ng-model-options="{ debounce: 500 }" placeholder="Find Grandparent" class="form-control controller"> </span> <span ng-if="vm.tree === null"> <input type="text" class="form-control controller" placeholder="Add a new family" ng-enter="vm.addFamily(vm.newFamilyName)" ng-model="vm.newFamilyName"> </span> <span> <div class="btn btn-default" ng-click="vm.demo()"> Demo </div> </span> <span> <div class="btn btn-default" ng-if="vm.tree" ng-click="vm.removeFamily()"> Remove Family Tree </div> </span> </div> <div class="row no-gutter tree-container" ng-if="vm.tree"> <ul> <li> <a class="item" ng-class="{'no-sibling': vm.tree.noSibling,
+										 'no-children': vm.tree.children.length === 0,
+										 'grand-view': vm.grandView && !vm.isSearchResult(vm.tree),
+										 'most-grandchildren': vm.tree === vm.mostGrandChildren}" ng-click="vm.toggleEdit(vm.tree)"> {{vm.tree.name}} <input ng-if="vm.tree.edit" type="text" class="form-control" placeholder="Add a Child" ng-keydown="vm.handleKeyEvent($event, vm.tree)" ng-click="$event.stopPropagation();" ng-enter="vm.addChild(vm.tree.newChildName, vm.tree)" ng-model="vm.tree.newChildName"> </a> <ul> <li ng-repeat="child in vm.tree.children"> <a class="item" ng-class="{'no-sibling': child.noSibling,
+												 'no-children': child.children.length === 0,
+												 'grand-view': vm.grandView && !vm.isSearchResult(child),
+												 'most-grandchildren': child === vm.mostGrandChildren}" ng-click="vm.toggleEdit(child)"> {{child.name}} <input ng-if="child.edit" class="form-control" type="text" placeholder="Add a Child" ng-keydown="vm.handleKeyEvent($event, child)" ng-click="$event.stopPropagation();" ng-enter="vm.addChild(child.newChildName, child)" ng-model="child.newChildName"> </a> <ul ng-if="child.children.length > 0" ng-include="'node.html'"> </ul> </li> </ul> </li> </ul> </div> </div> <script type="text/ng-template" id="node.html"><li ng-repeat="child in child.children">
+		<a class="item"
+			ng-class="{'no-sibling': child.noSibling,
+								 'no-children': child.children.length === 0,
+								 'grand-view': vm.grandView && !vm.isSearchResult(child),
+								'most-grandchildren': child === vm.mostGrandChildren}"
+			ng-click="vm.toggleEdit(child)">
+			{{child.name}}
+			<input ng-if="child.edit"
+				type="text"
+				placeholder="Add a Child"
+				ng-keydown="vm.handleKeyEvent($event, child)"
+				ng-click="$event.stopPropagation();"
+				ng-enter="vm.addChild(child.newChildName, child)"
+				ng-model="child.newChildName" />
+		</a>
+		<ul ng-if="child.children.length > 0"
+			ng-include="'node.html'">
+		</ul>
+	</li></script>
