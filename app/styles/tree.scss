@@ -1,0 +1,173 @@
+/*Thats all. I hope you enjoyed it.
+Thanks :)*/
+
+
+@import 'main';
+.tree{
+	margin: 0;
+	padding: 0;
+	input[type="text"] {
+		color: $dark-gray;
+		&.controller{
+			margin-top: 15px;
+			width: 250px;
+			display: inline-block;
+		}
+	}
+	.tree-container{
+		display: -webkit-flex;
+		align-items: center;
+		justify-content: center;
+		-webkit-align-items: center;
+		-webkit-justify-content: center;
+	}
+	.instruction{
+		padding: 10px 0;
+	}
+	ul {
+		padding-top: 20px;
+		position: relative;
+		transition: all 0.2s;
+		-webkit-transition: all 0.2s;
+		-moz-transition: all 0.2s;
+
+		/* parent to child connection */
+		ul::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			border-left: 1px solid $regular-gray;
+			width: 0;
+			height: 20px;
+		}
+	}
+	li {
+		float: left;
+		list-style-type: none;
+		text-align: center;
+		position: relative;
+		padding: 20px 5px 0 5px;
+
+		transition: all 0.2s;
+		-webkit-transition: all 0.2s;
+		-moz-transition: all 0.2s;
+
+		&::before, &::after{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 50%;
+			border-top: 1px solid $regular-gray;
+			width: 50%;
+			height: 20px;
+		}
+		&::after {
+			right: auto;
+			left: 50%;
+			border-left: 1px solid $regular-gray;
+		}
+		/* Remove space from the top of single children */
+		&:only-child {
+			padding-top: 0;
+		}
+		/* no connection if only child */
+		&:only-child:after, &:only-child:before {
+			display: none;
+		}
+		/* Remove left connector from first child and 
+		right connector from last child */
+		&:first-child::before, &:last-child::after {
+			border: 0 none;
+		}
+		&:last-child::before {
+			border-right: 1px solid $regular-gray;
+			border-radius: 0 5px 0 0;
+			-webkit-border-radius: 0 5px 0 0;
+			-moz-border-radius: 0 5px 0 0;
+		}
+		&:first-child::after {
+			border-radius: 5px 0 0 0;
+			-webkit-border-radius: 5px 0 0 0;
+			-moz-border-radius: 5px 0 0 0;
+		}
+		a {
+			border: 1px solid $regular-gray;
+			padding: 10px 15px;
+			text-decoration: none;
+			color: $dark-gray;
+			font-size: 14px;
+			display: inline-block;
+			
+			border-radius: 5px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			
+			transition: all 0.2s;
+			-webkit-transition: all 0.2s;
+			-moz-transition: all 0.2s;
+
+			&.no-sibling {
+				background-color: #1d9989;
+				border-color: $light-gray;
+				color: white;
+			}
+			&.no-children {
+				background-color: $dark-blue;
+				border-color: $light-gray;
+				color: white;
+			}
+			&.most-grandchildren {
+				background-color: #CCB44D;
+				border-color: $light-gray;
+				color: white;
+			}
+			&.no-children.no-sibling {
+				background-color: $light-red;
+				border-color: $light-gray;
+				color: white;
+			}
+			&.grand-view{
+				opacity: 0.2;
+			}
+			&:hover, &:hover+ul li a {
+				background: $light-blue;
+				color: white;
+				border: 1px solid $light-gray;
+			}
+			input[type="text"] {
+				color: $dark-gray;
+			}
+			&:hover+ul li::after,
+			&:hover+ul li::before,
+			&:hover+ul::before,
+			&:hover+ul ul::before {
+				border-color: $light-blue;
+			}
+		}
+	}
+	
+	/* information bubble */
+	.bubble {
+		/*border: 1px solid $regular-gray;*/
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-size: 12px;
+		&.no-sibling {
+			background-color: #1d9989;
+			color: white;
+		}
+		&.no-children {
+			background-color: $dark-blue;	
+			color: white;
+		}
+		&.most-grandchildren {
+			background-color: #CCB44D;
+			color: white;
+		}
+		&.no-children.no-sibling {
+			background-color: $light-red;
+			color: white;
+		}
+	}
+}

@@ -41,6 +41,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "underscore": "^1.8.3"
+    "express": "^4.13.1",
+    "gzippo": "^0.2.0",
+    "morgan": "^1.6.1"
   }
 }

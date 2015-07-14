@@ -10,7 +10,10 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "latedef": "nofunc",
   "globals": {
-    "angular": false
+    "angular": false,
+    "_": false,
+    "TreeNode": false
   }
 }
