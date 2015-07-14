@@ -10,3 +10,7 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+## Style Guideline
+
+Following Angular Style Guideline (https://github.com/johnpapa/angular-styleguide)
